@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+// cookieSession makes req.user possible
 var logger = require('morgan');
 require("dotenv").config()
 var indexRouter = require('./routes/index');
@@ -16,6 +18,11 @@ mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+///CookieSession:: doesn't work without it
+app.use(cookieSession({
+  name: 'facebook-auth-session',
+  keys: ['key1', 'key2']
+}))
 require('./config/passport')(passport);
 app.use(passport.initialize())
 app.use(passport.session());
@@ -38,13 +45,17 @@ app.get("/failure", (req, res ) => {
   res.json({success: false, msg: "Failed to login"})
 })
 app.get("/success", (req, res) => {
+  console.log(req)
   res.json({success: true, msg: "Log in successfull"})
 })
 app.get('/auth/error', (req, res) => res.send('Unknown Error'))
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook', { 
+  scope : ['public_profile', 'email']
+}));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }),
 function(req, res) {
-   res.redirect('/success');
+  res.json(req.user)
+  //  res.redirect('/success');
 });
 
 // catch 404 and forward to error handler
