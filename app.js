@@ -2,30 +2,31 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
+// const cookieSession = require('cookie-session');
 // cookieSession makes req.user possible
 var logger = require('morgan');
 require("dotenv").config()
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const authRouter = require("./routes/auth")
 const passport = require("passport")
 var app = express();
 const isAuth = require("./middleware/auth")
 
 var mongoose = require('mongoose');
-var mongoDB = process.env.DB_HOST || "mongodb+srv://ivanbatur:ivanbatur@cluster0.rxq3l.mongodb.net/odinbook?retryWrites=true&w=majority";
+var mongoDB = process.env.DB_HOST;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 ///CookieSession:: doesn't work without it
-app.use(cookieSession({
-  name: 'facebook-auth-session',
-  keys: ['key1', 'key2']
-}))
+// app.use(cookieSession({
+//   name: 'facebook-auth-session',
+//   keys: ['key1', 'key2']
+// }))
 require('./config/passport')(passport);
 app.use(passport.initialize())
-app.use(passport.session());
+// app.use(passport.session());
 
 
 
@@ -37,26 +38,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-app.get('/', isAuth, (req,res)=>{
-  res.send(`Hello world ${req.user.displayName}`)
-})
-app.get("/failure", (req, res ) => {
-  res.json({success: false, msg: "Failed to login"})
-})
-app.get("/success", (req, res) => {
-  console.log(req)
-  res.json({success: true, msg: "Log in successfull"})
-})
-app.get('/auth/error', (req, res) => res.send('Unknown Error'))
-app.get('/auth/facebook', passport.authenticate('facebook', { 
-  scope : ['public_profile', 'email']
-}));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }),
-function(req, res) {
-  res.json(req.user)
-  //  res.redirect('/success');
-});
+app.use("/auth", authRouter)
+// app.get('/', isAuth, (req,res)=>{
+//   res.send(`Hello world ${req.user.displayName}`)
+// })
+// app.get("/failure", (req, res ) => {
+//   res.json({success: false, msg: "Failed to login"})
+// })
+// app.get("/success", (req, res) => {
+//   console.log(req)
+//   res.json({success: true, msg: "Log in successfull"})
+// })
+// app.get('/auth/error', (req, res) => res.send('Unknown Error'))
+// app.get('/auth/facebook', passport.authenticate('facebook', { 
+//   scope : ['public_profile', 'email']
+// }));
+// app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/error' }),
+// function(req, res) {
+//   res.json(req.user)
+//   //  res.redirect('/success');
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

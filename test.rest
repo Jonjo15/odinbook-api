@@ -1,0 +1,17 @@
+POST  http://localhost:3000/auth/register 
+Content-Type: application/json
+
+{
+    "first_name" : "asd", 
+    "family_name": "hahah", 
+    "password": "123456", 
+    "email": "email1@email.com"
+}
+
+###
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
+{
+    "password": "123456",
+    "email": "email@email.com",
+}
