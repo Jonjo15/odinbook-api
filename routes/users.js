@@ -107,6 +107,18 @@ router.put("/posts/:postId", async (req, res, next) => {
   }
   
 })
+//GET ALL THE POST INFO (USER, POST, COMMENT)
+router.get("/posts/:postId", async (req, res, next) => {
 
+  try {
+    const post = await Post.findById(req.params.postId).populate("creator", "_id first_name family_name")
+    if(!post) throw Error("Post doesn't exist")
+    const comments = await Comment.find({post: req.params.postId})
+    res.status(200).json({success: true, post, comments})
+  }
+  catch(e) {
+    res.status(400).json({success:false, msg: e.message})
+  }
+})
 
 module.exports = router;
