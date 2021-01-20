@@ -5,7 +5,7 @@ Content-Type: application/json
     "first_name" : "asd", 
     "family_name": "hahah", 
     "password": "123456", 
-    "email": "email1@email.com"
+    "email": "ivanivan@email.com"
 }
 
 ###

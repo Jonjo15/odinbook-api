@@ -14,24 +14,28 @@ router.get("/protected", passport.authenticate('jwt', { session: false }), (req,
 
 router.post("/login", async (req, res, next) => {
     try {
-        const user = await User.findOne({email: req.body.email})
-            if (!user) {
-                return res.status(401).json({success: false, msg: "couldnt find the user"})
-            }
-            else {
-                const result = await bcrypt.compare(req.body.password, user.password)
-                if (result) {
-                    const tokenObject = issueJWT(user)
-                    res.status(200).json({success: true, user, token: tokenObject.token, msg:"Logged in succesfully"})
-                }
-                else {
-                    res.status(401).json({success: false, msg: "invalid credentials"})
-                }
-            }
-    }
-    catch (err) {
-        next(err)
-    }
+        // Check for existing user
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) throw Error('User does not exist');
+    
+        const isMatch = await bcrypt.compare(req.body.password , user.password);
+        if (!isMatch) throw Error('Invalid credentials');
+    
+        const {token} = issueJWT(user)
+        if (!token) throw Error('Couldnt sign the token');
+    
+        res.status(200).json({
+          token,
+          user: {
+            id: user._id,
+            first_name: user.first_name,
+            family_name: user.family_name,
+            email: user.email
+          }
+        });
+      } catch (e) {
+        res.status(400).json({ msg: e.message });
+      }
 });
 
 router.post("/register", [
@@ -54,28 +58,35 @@ router.post("/register", [
       try {
         const user = await User.findOne({ email: req.body.email });
         if (user) throw Error('User already exists');
-
-        bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-            // if err, do something
-            // otherwise, store hashedPassword in DB
-            const user = new User({
-            first_name: req.body.first_name,
-            family_name: req.body.family_name,
-            email: req.body.email,
-            password: hashedPassword,
-            })
-            const result = await user.save()  
-            const userObj = {
-                first_name: result.first_name,
-                family_name: result.family_name,
-                email: result.email,
-                id: result._id
-            }
-            let tokenObject = issueJWT(result)
-            return res.json({success: true, user: userObj, token: tokenObject.token, msg: "user created"})
-            }
-        }
-    }
+    
+    
+        const hash = await bcrypt.hash(req.body.password, 10);
+        if (!hash) throw Error('Something went wrong hashing the password');
+    
+        const newUser = new User({
+          first_name: req.body.first_name,
+          family_name: req.body.family_name,
+          email: req.body.email,
+          password: hash
+        });
+    
+        const savedUser = await newUser.save();
+        if (!savedUser) throw Error('Something went wrong saving the user');
+    
+        const {token} = issueJWT(savedUser)
+    
+        res.status(200).json({
+          token,
+          user: {
+            id: savedUser._id,
+            first_name: savedUser.first_name,
+            family_name: savedUser.family_name,
+            email: savedUser.email
+          }
+        });
+      } catch (e) {
+        res.status(400).json({ error: e.message });
+      }
   }]);
 
 module.exports = router
