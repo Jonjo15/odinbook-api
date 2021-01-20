@@ -55,6 +55,27 @@ router.delete("/posts/:postId", async (req, res, next) => {
   }
 })
 
+router.put("/posts/:postId", async (req, res, next) => {
+  const post = await Post.findById(req.params.postId)
+  if(!post) throw Error("Post not found")
+  const index = post.likes.findIndex((id) => id === String(req.user._id))
+
+  if (index === -1) {
+    post.likes.push(String(req.user._id))
+  }
+  else {
+    post.likes = post.likes.filter((id) => id !== String(req.user._id))
+  }
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(req.params.postId, post, {new: true} )
+    if(!updatedPost) throw Error("Something went wrong")
+    res.status(200).json({success: true, updatedPost})
+  }
+  catch(e) {
+    res.status(400).json({success:false, msg: e.message})
+  }
+  
+})
 
 
 module.exports = router;
