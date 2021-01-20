@@ -85,7 +85,7 @@ router.post("/posts/:postId", [
   }
 ])
 
-//LIKE / UNLIKE
+//LIKE / UNLIKE POST
 router.put("/posts/:postId", async (req, res, next) => {
   const post = await Post.findById(req.params.postId)
   if(!post) throw Error("Post not found")
@@ -107,6 +107,29 @@ router.put("/posts/:postId", async (req, res, next) => {
   }
   
 })
+//LIKE UNLIKE COMMENT
+router.put("/comments/:commentId", async (req, res, next) => {
+  const comment = await Comment.findById(req.params.commentId)
+  if(!comment) throw Error("Comment not found")
+  const index = comment.likes.findIndex((id) => id === String(req.user._id))
+
+  if (index === -1) {
+    comment.likes.push(String(req.user._id))
+  }
+  else {
+    comment.likes = comment.likes.filter((id) => id !== String(req.user._id))
+  }
+  try {
+    const updatedComment = await Comment.findByIdAndUpdate(req.params.commentId, comment, {new: true} )
+    if(!updatedComment) throw Error("Something went wrong")
+    res.status(200).json({success: true, updatedComment})
+  }
+  catch(e) {
+    res.status(400).json({success:false, msg: e.message})
+  }
+  
+})
+
 //GET ALL THE POST INFO (USER, POST, COMMENT)
 router.get("/posts/:postId", async (req, res, next) => {
 
