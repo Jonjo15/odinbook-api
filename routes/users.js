@@ -55,6 +55,24 @@ router.delete("/posts/:postId", async (req, res, next) => {
     res.status(400).json({success: false, msg: e.message})
   }
 })
+//DELETE COMMENT
+router.delete("/comments/:commentId", async (req, res) => {
+  
+  try {
+    const comment = await Comment.findById(req.params.commentId)
+    if(!comment) throw Error("Comment not found")
+
+    if(!comment.creator.equals(req.user._id)) {
+      return res.status(403).json({success: false, msg: "Can't delete somoeno else's comment"})
+    }
+    const response = await comment.delete()
+    res.status(200).json({success:true, response,  msg: "Comment deleted successfully"})
+  }
+  catch(e) {
+    res.status(400).json({success: false, msg: e.message})
+  }
+})
+
 //COMMENT ON POST
 
 router.post("/posts/:postId", [
@@ -87,17 +105,17 @@ router.post("/posts/:postId", [
 
 //LIKE / UNLIKE POST
 router.put("/posts/:postId", async (req, res, next) => {
-  const post = await Post.findById(req.params.postId)
-  if(!post) throw Error("Post not found")
-  const index = post.likes.findIndex((id) => id === String(req.user._id))
-
-  if (index === -1) {
-    post.likes.push(String(req.user._id))
-  }
-  else {
-    post.likes = post.likes.filter((id) => id !== String(req.user._id))
-  }
   try {
+    const post = await Post.findById(req.params.postId)
+    if(!post) throw Error("Post not found")
+    const index = post.likes.findIndex((id) => id === String(req.user._id))
+
+    if (index === -1) {
+      post.likes.push(String(req.user._id))
+    }
+    else {
+      post.likes = post.likes.filter((id) => id !== String(req.user._id))
+    }
     const updatedPost = await Post.findByIdAndUpdate(req.params.postId, post, {new: true} )
     if(!updatedPost) throw Error("Something went wrong")
     res.status(200).json({success: true, updatedPost})
