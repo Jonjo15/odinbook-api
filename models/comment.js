@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema(
+const CommentSchema = new Schema(
     {
       creator: {type: Schema.Types.ObjectId, ref: 'User', required: true},
       post: {type: Schema.Types.ObjectId, ref: 'Post', required: true},
@@ -13,4 +13,4 @@ const PostSchema = new Schema(
   );
   
   //Export model
-  module.exports = mongoose.model('Post', PostSchema);
+  module.exports = mongoose.model('Comment', CommentSchema);

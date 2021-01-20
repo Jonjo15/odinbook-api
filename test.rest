@@ -8,14 +8,14 @@ Content-Type: application/json
     "email": "asad@emAail.com"
 }
 ###
-POST http://localhost:3000/users/posts/ 
+POST http://localhost:3000/users/posts/600887d4d67cbc5f0f7867e6 
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4MmVmOGJmMjhkODFjNjE2MmJlNWMiLCJpYXQiOjE2MTExNDkwNDgzODUsImV4cCI6MTYxMTE0OTEzNDc4NX0.rkp7UgksevhxiFilJth9124TalnQyiTR1yFi_Wc6ohg
  
 {
-    "body": "My TEST post"
+    "body": "My TEST COMMENT"
 }
 
 ###
-DELETE http://localhost:3000/users/posts/60083c1d246dab6afd09c061
+DELETE http://localhost:3000/users/posts/60083c56246dab6afd09c063
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4M2M0NDI0NmRhYjZhZmQwOWMwNjIiLCJpYXQiOjE2MTExNTI0NTI3MDYsImV4cCI6MTYxMTE1MjUzOTEwNn0.FL1E-NaiBgkWMOdV0z0MJsEFYw8BLymulpkyH0I56qs

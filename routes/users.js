@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Post = require("../models/post")
+const Comment = require("../models/comment")
 const User = require("../models/user")
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
@@ -39,7 +40,7 @@ router.post("/posts", [
       }
   }
 ]);
-
+// DELETE POST
 router.delete("/posts/:postId", async (req, res, next) => {
   const post = await Post.findById(req.params.postId)
   if(!post) throw Error("Post not found")
@@ -54,7 +55,37 @@ router.delete("/posts/:postId", async (req, res, next) => {
     res.status(400).json({success: false, msg: e.message})
   }
 })
+//COMMENT ON POST
 
+router.post("/posts/:postId", [
+  body('body', 'Comment must not be empty').trim().isLength({ min: 1 }).escape(),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized values/error messages.
+      res.status(401).json({success: false, msg: "input error"})
+      return;
+    }
+    const newComment = new Comment({
+      body: req.body.body,
+      creator: req.user._id,
+      post: req.params.postId
+    })
+    try {
+      const comment = await newComment.save()
+      if (!comment) throw Error('Something went wrong creating a new comment');
+
+      return res.status(200).json({success: true, comment, msg: "comment created successfully"})
+    }
+    catch (e) {
+      res.status(400).json({success: false,  msg: e.message });
+    }
+  }
+])
+
+//LIKE / UNLIKE
 router.put("/posts/:postId", async (req, res, next) => {
   const post = await Post.findById(req.params.postId)
   if(!post) throw Error("Post not found")
