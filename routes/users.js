@@ -22,7 +22,7 @@ router.post("/posts", [
 
       if (!errors.isEmpty()) {
         // There are errors. Render the form again with sanitized values/error messages.
-        res.status(401).json({success: false, msg: "input error"})
+        res.status(400).json({success: false, msg: "input error"})
         return;
       }
 

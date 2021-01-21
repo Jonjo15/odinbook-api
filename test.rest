@@ -1,27 +1,32 @@
-POST  http://localhost:3000/auth/register 
+POST  http://localhost:3000/auth/login 
 Content-Type: application/json
 
 {
-    "first_name": "ivan",
-    "family_name": "b",
     "password": "123456", 
-    "email": "asaa111as2d@emAail.com"
+    "email": "friend@emaail.com"
 }
 ###
-PUT http://localhost:3000/users/posts/60089116b4d199713a05e3ae 
+GET http://localhost:3000/notifications/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjIxMTc4MzUsImV4cCI6MTYxMTI2MjIwNDIzNX0.uEBoDiVk88pakU1okQUfr-O33Pf_3PSjNOTFv9fuYIk
+
+###
+POST http://localhost:3000/requests/6009e3c2b29562292ffa2426
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQ1ZjJiODIxODI5MzhhYzY0ZjMiLCJpYXQiOjE2MTEyNjEwMjM2MzEsImV4cCI6MTYxMTI2MTExMDAzMX0.H9R2YVdntQ_0Q9pG92X8GR-BUDcOWwtu9F5iLLTMkWc
+###
+POST  http://localhost:3000/requests/6009e45f2b82182938ac64f3/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjA4NjY0NzcsImV4cCI6MTYxMTI2MDk1Mjg3N30.ylxQM5izSNv2x336tb87wBOWpBVN2sJ4_B6hNFPao08
+###
+PUT http://localhost:3000/users/posts/6009e636d06d6b2e01a81a5b 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4OGZhZjU1YzlkMDZlMzEwMWM0OGIiLCJpYXQiOjE2MTExNzM4MDcyMTksImV4cCI6MTYxMTE3Mzg5MzYxOX0.ms9J4_r1qVkVx3JfKSM7zQWOk-_9EFH9QDWoT_GHyZk 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEyNjE1MzUwMjQsImV4cCI6MTYxMTI2MTYyMTQyNH0.7sA5DEoD-VoVu-Oif1dsaVnTTS7q1tEWSQvc3UIJD78
 
 {
-    "body": "My TEST COMMENT3"
+    "body": "new cmment"
 }
 ###
-GET http://localhost:3000/requests/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5Nzg5ZDRkODgxYTdhOTg3M2NjODMiLCJpYXQiOjE2MTEyMzM0Mzc2NDEsImV4cCI6MTYxMTIzMzUyNDA0MX0.v3-wo_zDeGo8Bw24zOQxusNyerz2WAVOeUE-pvDEOhE
-###
-DELETE http://localhost:3000/users/comments/6008909503aff170152dc9c2 
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4OGZhZjU1YzlkMDZlMzEwMWM0OGIiLCJpYXQiOjE2MTExNzM4MDcyMTksImV4cCI6MTYxMTE3Mzg5MzYxOX0.ms9J4_r1qVkVx3JfKSM7zQWOk-_9EFH9QDWoT_GHyZk 
-###
-DELETE http://localhost:3000/users/posts/60083c56246dab6afd09c063
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4M2M0NDI0NmRhYjZhZmQwOWMwNjIiLCJpYXQiOjE2MTExNTI0NTI3MDYsImV4cCI6MTYxMTE1MjUzOTEwNn0.FL1E-NaiBgkWMOdV0z0MJsEFYw8BLymulpkyH0I56qs
+POST http://localhost:3000/users/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjA4NjY0NzcsImV4cCI6MTYxMTI2MDk1Mjg3N30.ylxQM5izSNv2x336tb87wBOWpBVN2sJ4_B6hNFPao08
+
+{
+    "body": "new post body asdlasdkasld"
+}
