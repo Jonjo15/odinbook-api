@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const passport = require("passport")
 const User = require("../models/user")
+const Notification = require("../models/notification")
 router.use(passport.authenticate('jwt', { session: false }))
 
 router.get("/", (req, res) => {
@@ -67,7 +68,21 @@ router.post("/:userId/accept", async (req,res) => {
         if(!updatedUser) throw Error("Something went wrong with saving the user")
         const updAcceptedUser = await User.findByIdAndUpdate(req.params.userId, acceptedUser, {new: true})
         if(!updAcceptedUser) throw Error("Something went wrong with saving friendship in accepted user friend list")
-        res.status(200).json({success: true, updatedUser})
+
+
+        //CREATE AND SAVE NOTIFICATION
+        let notify;
+        if(!req.user._id.equals(req.params.userId)) {
+            const newNotify = new Notification({
+            sender: req.user._id,
+            recipient: req.params.userId,
+            type: "accept"
+          })
+          notify = await newNotify.save()
+          if(!notify) throw Error("Something went wrong with saving notification")
+        }
+
+        res.status(200).json({success: true, updatedUser, updAcceptedUser, notify})
     }
     catch(e) {
         res.status(400).json({success:false, msg: e.message})
