@@ -5,17 +5,23 @@ Content-Type: application/json
     "first_name": "ivan",
     "family_name": "b",
     "password": "123456", 
-    "email": "asad@emAail.com"
+    "email": "asaa111as2d@emAail.com"
 }
 ###
-POST http://localhost:3000/users/posts/600887d4d67cbc5f0f7867e6 
+PUT http://localhost:3000/users/posts/60089116b4d199713a05e3ae 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4MmVmOGJmMjhkODFjNjE2MmJlNWMiLCJpYXQiOjE2MTExNDkwNDgzODUsImV4cCI6MTYxMTE0OTEzNDc4NX0.rkp7UgksevhxiFilJth9124TalnQyiTR1yFi_Wc6ohg
- 
-{
-    "body": "My TEST COMMENT"
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4OGZhZjU1YzlkMDZlMzEwMWM0OGIiLCJpYXQiOjE2MTExNzM4MDcyMTksImV4cCI6MTYxMTE3Mzg5MzYxOX0.ms9J4_r1qVkVx3JfKSM7zQWOk-_9EFH9QDWoT_GHyZk 
 
+{
+    "body": "My TEST COMMENT3"
+}
+###
+GET http://localhost:3000/requests/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5Nzg5ZDRkODgxYTdhOTg3M2NjODMiLCJpYXQiOjE2MTEyMzM0Mzc2NDEsImV4cCI6MTYxMTIzMzUyNDA0MX0.v3-wo_zDeGo8Bw24zOQxusNyerz2WAVOeUE-pvDEOhE
+###
+DELETE http://localhost:3000/users/comments/6008909503aff170152dc9c2 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4OGZhZjU1YzlkMDZlMzEwMWM0OGIiLCJpYXQiOjE2MTExNzM4MDcyMTksImV4cCI6MTYxMTE3Mzg5MzYxOX0.ms9J4_r1qVkVx3JfKSM7zQWOk-_9EFH9QDWoT_GHyZk 
 ###
 DELETE http://localhost:3000/users/posts/60083c56246dab6afd09c063
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA4M2M0NDI0NmRhYjZhZmQwOWMwNjIiLCJpYXQiOjE2MTExNTI0NTI3MDYsImV4cCI6MTYxMTE1MjUzOTEwNn0.FL1E-NaiBgkWMOdV0z0MJsEFYw8BLymulpkyH0I56qs

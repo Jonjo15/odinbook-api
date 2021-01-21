@@ -9,6 +9,7 @@ require("dotenv").config()
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require("./routes/auth")
+const requestRouter = require("./routes/requests")
 const passport = require("passport")
 var app = express();
 const isAuth = require("./middleware/auth")
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use("/requests", requestRouter)
 app.use("/auth", authRouter)
 // app.get('/', isAuth, (req,res)=>{
 //   res.send(`Hello world ${req.user.displayName}`)
