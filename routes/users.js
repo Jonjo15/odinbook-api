@@ -107,7 +107,7 @@ router.post("/posts/:postId", [
           sender: req.user._id,
           recipient: post.creator,
           post: post._id,
-          type: "like"
+          type: "comment"
         })
         notify = await newNotify.save()
         if (!notify) throw Error("Something went wrong creating a notification")    
@@ -173,6 +173,17 @@ router.put("/comments/:commentId", async (req, res, next) => {
     }
     const updatedComment = await Comment.findByIdAndUpdate(req.params.commentId, comment, {new: true} )
     if(!updatedComment) throw Error("Something went wrong")
+
+    if(!req.user._id.equals(comment.creator)) {
+      const newNotify = new Notification({
+      sender: req.user._id,
+      recipient: comment.creator,
+      comment: comment._id,
+      type: "comment"
+    })
+    notify = await newNotify.save()
+    if(!notify) throw Error("Something went wrong with saving notification")
+  }
     res.status(200).json({success: true, updatedComment})
   }
   catch(e) {
