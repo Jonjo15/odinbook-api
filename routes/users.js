@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Post = require("../models/post")
 const Comment = require("../models/comment")
+const Notification = require("../models/notification")
 const User = require("../models/user")
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
@@ -93,10 +94,25 @@ router.post("/posts/:postId", [
       post: req.params.postId
     })
     try {
+      const post = await Post.findById(req.params.postId)
+      if(!post) throw Error("Post doesnt exist")
+
+      
       const comment = await newComment.save()
       if (!comment) throw Error('Something went wrong creating a new comment');
 
-      return res.status(200).json({success: true, comment, msg: "comment created successfully"})
+      let notify;
+      if(!req.user._id.equals(post.creator)) {
+          const newNotify = new Notification({
+          sender: req.user._id,
+          recipient: post.creator,
+          post: post._id,
+          type: "like"
+        })
+        notify = await newNotify.save()
+        if (!notify) throw Error("Something went wrong creating a notification")    
+      }
+      return res.status(200).json({success: true, comment, notify, msg: "comment created successfully"})
     }
     catch (e) {
       res.status(400).json({success: false,  msg: e.message });
@@ -117,9 +133,23 @@ router.put("/posts/:postId", async (req, res, next) => {
     else {
       post.likes = post.likes.filter((id) => id !== String(req.user._id))
     }
+
+    
+
     const updatedPost = await Post.findByIdAndUpdate(req.params.postId, post, {new: true} )
     if(!updatedPost) throw Error("Something went wrong")
-    res.status(200).json({success: true, updatedPost})
+    let notify;
+    if(!req.user._id.equals(post.creator)) {
+        const newNotify = new Notification({
+        sender: req.user._id,
+        recipient: post.creator,
+        post: post._id,
+        type: "like"
+      })
+      notify = await newNotify.save()
+      if(!notify) throw Error("Something went wrong with saving notification")
+    }
+    res.status(200).json({success: true, updatedPost, notify})
   }
   catch(e) {
     res.status(400).json({success:false, msg: e.message})
@@ -131,7 +161,7 @@ router.put("/comments/:commentId", async (req, res, next) => {
   
   try {
     const comment = await Comment.findById(req.params.commentId)
-    
+
     if(!comment) throw Error("Comment not found")
     const index = comment.likes.findIndex((id) => id === String(req.user._id))
 
