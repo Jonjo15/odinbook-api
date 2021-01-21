@@ -44,6 +44,8 @@ router.post("/:userId", async(req, res, next) => {
 router.post("/:userId/accept", async (req,res) => {
     
     try {
+        const acceptedUser = await User.findById(req.params.userId)
+        if(!acceptedUser) throw Error("User doesnt exist")
         //FIND IF THERE IS A FRIEND REQUEST IN THE USERS F.R. ARRAy
         const index = req.user.friendRequests.findIndex((id) => String(id) === String(req.params.userId))
         if (index === -1 ) throw Error("Friend request doesnt exist")
@@ -53,10 +55,18 @@ router.post("/:userId/accept", async (req,res) => {
         if (frIndx !== -1) throw Error("Already friends with this user")
         // friendRequests = friendRequests.filter()
 
+        //REMOVE FRIEND REQUEST
         req.user.friendRequests = req.user.friendRequests.filter((id) => String(id) !== String(req.params.userId))
+
+        //add each other in friends arrays
         req.user.friends.push(req.params.userId)
+        acceptedUser.friends.push(req.user._id)
+
+        //save the documents
         const updatedUser = await User.findByIdAndUpdate(req.user._id, req.user, {new: true})
         if(!updatedUser) throw Error("Something went wrong with saving the user")
+        const updAcceptedUser = await User.findByIdAndUpdate(req.params.userId, acceptedUser, {new: true})
+        if(!updAcceptedUser) throw Error("Something went wrong with saving friendship in accepted user friend list")
         res.status(200).json({success: true, updatedUser})
     }
     catch(e) {
@@ -66,6 +76,8 @@ router.post("/:userId/accept", async (req,res) => {
 //DECLINE FRIEND REQUEST
 router.post("/:userId/decline", async (req, res) => {
     try {
+        const declinedUser = await User.findById(req.params.userId)
+        if(!declinedUser) throw Error("User doesnt exist")
         //FIND IF THERE IS A FRIEND REQUEST IN THE USERS F.R. ARRAy
         const index = req.user.friendRequests.findIndex((id) => String(id) === String(req.params.userId))
         if (index === -1 ) throw Error("Friend request doesnt exist")
