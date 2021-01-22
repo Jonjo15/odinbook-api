@@ -63,12 +63,22 @@ router.delete("/comments/:commentId", async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.commentId)
     if(!comment) throw Error("Comment not found")
+    const post = await Post.findById(comment.post)
+    if(!post) throw Error("This comment is on a deleted Post")
 
     if(!comment.creator.equals(req.user._id)) {
       return res.status(403).json({success: false, msg: "Can't delete somoeno else's comment"})
     }
     const response = await comment.delete()
-    res.status(200).json({success:true, response,  msg: "Comment deleted successfully"})
+    let postToSave
+    if(response) {
+      //REMOVE COMMENT FROM THE POST
+      post.comments = post.comments.filter(id => String(id) !== String(comment._id))
+      postToSave = await post.save()
+      if(!postToSave) throw Error("Something went wrong")
+      //NEED TO TEST THIS OUT
+    }
+    res.status(200).json({success:true, response, postToSave,  msg: "Comment deleted successfully"})
   }
   catch(e) {
     res.status(400).json({success: false, msg: e.message})
@@ -100,6 +110,10 @@ router.post("/posts/:postId", [
       
       const comment = await newComment.save()
       if (!comment) throw Error('Something went wrong creating a new comment');
+      post.comments.push(comment._id)
+      //SAVE COMMENT IN POST MODEL ARRAY
+      const updatedPost = await post.save()
+      if(!updatedPost) throw Error("Something went wrong with saving a comment in Post")
 
       let notify;
       if(!req.user._id.equals(post.creator)) {
@@ -112,7 +126,7 @@ router.post("/posts/:postId", [
         notify = await newNotify.save()
         if (!notify) throw Error("Something went wrong creating a notification")    
       }
-      return res.status(200).json({success: true, comment, notify, msg: "comment created successfully"})
+      return res.status(200).json({success: true, comment,updatedPost, notify, msg: "comment created successfully"})
     }
     catch (e) {
       res.status(400).json({success: false,  msg: e.message });
@@ -139,7 +153,7 @@ router.put("/posts/:postId", async (req, res, next) => {
     const updatedPost = await Post.findByIdAndUpdate(req.params.postId, post, {new: true} )
     if(!updatedPost) throw Error("Something went wrong")
     let notify;
-    if(!req.user._id.equals(post.creator)) {
+    if(!req.user._id.equals(post.creator) && index === -1) {
         const newNotify = new Notification({
         sender: req.user._id,
         recipient: post.creator,
@@ -196,10 +210,12 @@ router.put("/comments/:commentId", async (req, res, next) => {
 router.get("/posts/:postId", async (req, res, next) => {
 
   try {
-    const post = await Post.findById(req.params.postId).populate("creator", "_id first_name family_name")
+    const post = await Post.findById(req.params.postId)
+    .populate("creator", "_id first_name family_name")
+    .populate("comments")
     if(!post) throw Error("Post doesn't exist")
-    const comments = await Comment.find({post: req.params.postId})
-    res.status(200).json({success: true, post, comments})
+    // const comments = await Comment.find({post: req.params.postId})
+    res.status(200).json({success: true, post})
   }
   catch(e) {
     res.status(400).json({success:false, msg: e.message})

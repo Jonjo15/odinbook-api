@@ -7,7 +7,7 @@ const PostSchema = new Schema(
       creator: {type: Schema.Types.ObjectId, ref: 'User', required: true},
       body: {type: String, required: true},
       likes: {type: [String], default: []},
-      comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+      comments: [{ type: [Schema.Types.ObjectId], ref: "Comment", default: []}],
       createdAt: { type: Date, default: new Date().toISOString() }
     }   
   );
