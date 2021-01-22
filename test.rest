@@ -6,7 +6,7 @@ Content-Type: application/json
     "email": "friend@emaail.com"
 }
 ###
-GET http://localhost:3000/notifications/
+PUT  http://localhost:3000/notifications/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjIxMTc4MzUsImV4cCI6MTYxMTI2MjIwNDIzNX0.uEBoDiVk88pakU1okQUfr-O33Pf_3PSjNOTFv9fuYIk
 
 ###

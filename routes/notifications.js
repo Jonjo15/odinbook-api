@@ -17,7 +17,7 @@ router.get("/", async(req, res) => {
         res.status(400).json({success: false, msg: e.message})
     }
 })
-
+//MARK NOTIFICATIONS READ
 router.put("/", async (req, res) => {
     try {
         const response = await Notification.updateMany({recipient: req.user._id, seen: false}, {seen: true})

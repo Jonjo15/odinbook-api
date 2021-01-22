@@ -5,9 +5,7 @@ const User = require("../models/user")
 const Notification = require("../models/notification")
 router.use(passport.authenticate('jwt', { session: false }))
 
-router.get("/", (req, res) => {
-    res.json({user: req.user})
-})
+
 //SEND FRIEND REQUEST
 router.post("/:userId", async(req, res, next) => {
     const friends = req.user.friends;
