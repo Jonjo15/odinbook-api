@@ -51,7 +51,12 @@ router.delete("/posts/:postId", async (req, res, next) => {
       return res.status(403).json({success: false, msg: "Can't delete someone else's post"})
     }
     const response = await post.delete()
-    res.status(200).json({success:true, response,  msg: "Post deleted successfully"})
+    let result;
+    if(response) {
+      //DELETE POSTS COMMENTS
+      result = await Comment.deleteMany({post: req.params.postId })
+    }
+    res.status(200).json({success:true, response, result,  msg: "Post deleted successfully"})
   }
   catch(e) {
     res.status(400).json({success: false, msg: e.message})
