@@ -41,6 +41,26 @@ router.put("/",
     res.status(400).json({msg: e.message})
   }
 })
+
+///GET ALL THE POSTS FROM A USER
+router.get("/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId).select("-password")
+    if(!user) throw Error("User does not exist")
+    const posts = await Post.find({creator: user._id}).populate({ 
+      path: 'comments',
+      populate: [{
+       path: 'creator',
+       select: 'first_name family_name _id'
+      //  model: 'Component'
+      }] 
+   })
+    res.status(200).json({success: true, user, posts})
+  }
+  catch (e) {
+    res.status(400).json({msg: e.message})
+  }
+})
 //Create a post
 router.post("/posts", [
   body('body', 'Post must not be empty').trim().isLength({ min: 1 }).escape(),
