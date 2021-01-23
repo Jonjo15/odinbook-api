@@ -1,27 +1,31 @@
 POST  http://localhost:3000/auth/login 
 Content-Type: application/json
 
-{
+{   
     "password": "123456", 
-    "email": "friend@emaail.com"
+    "email": "new3@emaail.com"
 }
 ###
-PUT  http://localhost:3000/notifications/
+PUT http://localhost:3000/users/
+Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjIxMTc4MzUsImV4cCI6MTYxMTI2MjIwNDIzNX0.uEBoDiVk88pakU1okQUfr-O33Pf_3PSjNOTFv9fuYIk
 
+{
+    "bio": "asdasd"
+}
 ###
 POST http://localhost:3000/requests/6009e3c2b29562292ffa2426
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQ1ZjJiODIxODI5MzhhYzY0ZjMiLCJpYXQiOjE2MTEyNjEwMjM2MzEsImV4cCI6MTYxMTI2MTExMDAzMX0.H9R2YVdntQ_0Q9pG92X8GR-BUDcOWwtu9F5iLLTMkWc
 ###
-POST  http://localhost:3000/requests/6009e45f2b82182938ac64f3/accept
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjA4NjY0NzcsImV4cCI6MTYxMTI2MDk1Mjg3N30.ylxQM5izSNv2x336tb87wBOWpBVN2sJ4_B6hNFPao08
+DELETE http://localhost:3000/users/comments/600b365fc084a11e4090697d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEzNDgxNDk1MjcsImV4cCI6MTYxMTM0ODIzNTkyN30.LLHfIotPXuNlHr9RTmbio0UU8GMuCbGWHxrZFRTeIt0
 ###
-PUT http://localhost:3000/users/posts/6009e636d06d6b2e01a81a5b 
+GET  http://localhost:3000/users/posts/600b364dc084a11e4090697b 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEyNjE1MzUwMjQsImV4cCI6MTYxMTI2MTYyMTQyNH0.7sA5DEoD-VoVu-Oif1dsaVnTTS7q1tEWSQvc3UIJD78
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEzNDgxNDk1MjcsImV4cCI6MTYxMTM0ODIzNTkyN30.LLHfIotPXuNlHr9RTmbio0UU8GMuCbGWHxrZFRTeIt0
 
 {
-    "body": "new cmment"
+    "body": "new casdasdmmentasdasd"
 }
 ###
 POST http://localhost:3000/users/posts

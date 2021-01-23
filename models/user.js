@@ -8,6 +8,7 @@ const UserSchema = new Schema(
       family_name: {type: String, required: true, maxlength: 100},
       email: {type: String, required: true},
       password: {type: String, required:true},
+      bio: {type: String, maxlength: 300},
       admin: { type: Boolean, default: false },
       friends: [{type: Schema.Types.ObjectId, ref: "User"}],
       friendRequests: [{type: Schema.Types.ObjectId, ref: "User"}]

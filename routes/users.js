@@ -10,10 +10,37 @@ const { body, validationResult } = require("express-validator");
 
 router.use(passport.authenticate('jwt', { session: false }))
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', async (req, res, next) =>{
+  try {
+    const users = await User.find().select('-password');
+    if (!users) throw Error('No users exist');
+    res.json(users);
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
 });
 
+//UPDATE USER BIO
+router.put("/",
+ body('bio', 'Bio must not be empty').trim().isLength({ min: 1 }).escape(),
+
+ async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    // There are errors. Render the form again with sanitized values/error messages.
+    res.status(400).json({success: false, errors, msg: "input error"})
+    return;
+  }
+  try {
+    const response = await User.findByIdAndUpdate(req.user._id, {bio: req.body.bio}, {new: true}).select("-password")
+    if(!response) throw Error("Something went wrong with updating bio")
+    res.status(200).json({success: true, response})
+  }
+  catch (e) {
+    res.status(400).json({msg: e.message})
+  }
+})
 //Create a post
 router.post("/posts", [
   body('body', 'Post must not be empty').trim().isLength({ min: 1 }).escape(),
