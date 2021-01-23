@@ -47,6 +47,12 @@ router.get("/:userId", async (req, res) => {
   try {
     const user = await User.findById(req.params.userId).select("-password")
     if(!user) throw Error("User does not exist")
+
+    const index = user.friends.findIndex((id) => String(id) === String(req.user._id))
+    const bool = String(req.user._id) === String(req.params.userId)
+
+    if (index === -1 && !bool) throw Error("You are not allowed to see this users posts")
+    // if (!user.friends.includes(req.user._id) || !req.user._id.equals(req.params.userId)) throw Error("You are not friends with this user, you cant see his posts")
     const posts = await Post.find({creator: user._id}).populate({ 
       path: 'comments',
       populate: [{
