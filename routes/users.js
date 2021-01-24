@@ -69,8 +69,10 @@ router.get("/:userId", async (req, res) => {
   }
 })
 //TODO: HOME PAGE FEED
-router.get("/users/home", async(req, res) => {
+router.get("/home", async(req, res) => {
   //TODO:
+  // const {friends} = req.user;
+  res.status(200).json({success: true})
 })
 
 //Create a post

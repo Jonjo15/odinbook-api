@@ -6,12 +6,12 @@ Content-Type: application/json
     "email": "new3@emaail.com"
 }
 ###
-GET  http://localhost:3000/users/6009e65ed06d6b2e01a81a5e
+GET   http://localhost:3000/home
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTE0MzM5NDkyNTQsImV4cCI6MTYxMTQzNDAzNTY1NH0.2k0taEPYGLPXIpxa_kKWhdifzL1dHgchBvpjTtKvB78
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTE0ODA1MTA0MDUsImV4cCI6MTYxMTQ4MDU5NjgwNX0.82h6aTfybe-0soHCaZwCuKMn3U2Cebg40qvr5nUbQ6o
 
 {
-    "bio": "HI IM A LEGEND1"
+    "body": "HI IM A 6"
 }
 ###
 POST http://localhost:3000/requests/6009e3c2b29562292ffa2426
@@ -20,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQ1Z
 DELETE http://localhost:3000/users/comments/600b365fc084a11e4090697d
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEzNDgxNDk1MjcsImV4cCI6MTYxMTM0ODIzNTkyN30.LLHfIotPXuNlHr9RTmbio0UU8GMuCbGWHxrZFRTeIt0
 ###
-GET  http://localhost:3000/users/posts/600b311824baaa1542f7695f 
+GET  http://localhost:3000/users/posts/600d3f8d9d532c6907291755 
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEzNDgxNDk1MjcsImV4cCI6MTYxMTM0ODIzNTkyN30.LLHfIotPXuNlHr9RTmbio0UU8GMuCbGWHxrZFRTeIt0
 
