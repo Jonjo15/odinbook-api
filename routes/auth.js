@@ -12,6 +12,17 @@ router.get("/protected", passport.authenticate('jwt', { session: false }), (req,
     res.status(200).json({ success: true, msg: req.user});
   });
 
+router.post('/facebook/token', passport.authenticate('facebook-token', {session: false}), (req, res) => {
+  res.status(200).json({success: true, user: req.user})
+}); // function (req, res) {
+  //   // do something with req.user
+  //   res.send(req.user? 200 : 401);
+  // }
+  // facebookOAuth: async (req, res, next) => {
+  //   // Generate token
+  //   const token = signToken(req.user);
+  //   res.status(200).json({ token });
+  // },
 router.post("/login", async (req, res, next) => {
     try {
         // Check for existing user

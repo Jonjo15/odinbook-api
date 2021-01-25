@@ -1,28 +1,32 @@
-POST  http://localhost:3000/auth/login 
+POST  http://localhost:3000/auth/facebook/token 
 Content-Type: application/json
 
 {   
-    "password": "123456", 
-    "email": "new3@emaail.com"
+    "access_token": "EAAB2bdFWL7gBAOVbVFYTrE2otCPVAaotxfj4TsVDlEpWFG0itGOI1lHhMZCAK2V0hxdxWOpGFEzukH0so5bbhfw40HXM5syQswZBwJYQkgiVkIGh8ZCuZCjsKcbeyVBufpDwQ4iU6npDxi54NzQKFxrlS8kvGBU02TqbxiqpX6Vp6SPWxPl6c1ZBVIYUmX72P9rzVfqNQh38wcACNlUZBSbEjEglGDhehZC76T0ip1LRgZDZD"
 }
 ###
 GET   http://localhost:3000/home
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTE0ODA1MTA0MDUsImV4cCI6MTYxMTQ4MDU5NjgwNX0.82h6aTfybe-0soHCaZwCuKMn3U2Cebg40qvr5nUbQ6o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTE0OTAwODgzMjEsImV4cCI6MTYxMTQ5MDE3NDcyMX0.Py9JWnEnE7_e5Xxeq6aKIg2PRl_K3h2VdUo8Ak_kEMI
 
 {
     "body": "HI IM A 6"
 }
 ###
-POST http://localhost:3000/requests/6009e3c2b29562292ffa2426
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQ1ZjJiODIxODI5MzhhYzY0ZjMiLCJpYXQiOjE2MTEyNjEwMjM2MzEsImV4cCI6MTYxMTI2MTExMDAzMX0.H9R2YVdntQ_0Q9pG92X8GR-BUDcOWwtu9F5iLLTMkWc
+POST http://localhost:3000/users/posts/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTE0ODg1MDg2NzAsImV4cCI6MTYxMTQ4ODU5NTA3MH0.4dFbKjXvNSZxky2PLktAObSNvdJgbg9vqRuVJKypAe4
+
+{
+    "body": "halleleleluja"
+}
 ###
 DELETE http://localhost:3000/users/comments/600b365fc084a11e4090697d
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEzNDgxNDk1MjcsImV4cCI6MTYxMTM0ODIzNTkyN30.LLHfIotPXuNlHr9RTmbio0UU8GMuCbGWHxrZFRTeIt0
 ###
-GET  http://localhost:3000/users/posts/600d3f8d9d532c6907291755 
+POST  http://localhost:3000/users/posts/ 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTY1ZWQwNmQ2YjJlMDFhODFhNWUiLCJpYXQiOjE2MTEzNDgxNDk1MjcsImV4cCI6MTYxMTM0ODIzNTkyN30.LLHfIotPXuNlHr9RTmbio0UU8GMuCbGWHxrZFRTeIt0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQxNDJiODIxODI5MzhhYzY0ZjEiLCJpYXQiOjE2MTE0ODgwNDY1NTAsImV4cCI6MTYxMTQ4ODEzMjk1MH0.cZFYzbCEk3xELjhz3bGzvYzpqIsL3F6sQlZNGnXdnLI"
 
 {
     "body": "new casdasdmmentasdasd"

@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get("/home",passport.authenticate('jwt', { session: false }), async(req, res) => {
-  //TODO:
+  // console.log("im here")
   let friends = req.user.friends;
   friends.push(req.user._id)
   let timelinePosts = [];
