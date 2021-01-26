@@ -2,8 +2,11 @@ POST  http://localhost:3000/auth/facebook/token
 Content-Type: application/json
 
 {   
-    "access_token": "EAAB2bdFWL7gBAOVbVFYTrE2otCPVAaotxfj4TsVDlEpWFG0itGOI1lHhMZCAK2V0hxdxWOpGFEzukH0so5bbhfw40HXM5syQswZBwJYQkgiVkIGh8ZCuZCjsKcbeyVBufpDwQ4iU6npDxi54NzQKFxrlS8kvGBU02TqbxiqpX6Vp6SPWxPl6c1ZBVIYUmX72P9rzVfqNQh38wcACNlUZBSbEjEglGDhehZC76T0ip1LRgZDZD"
+    "access_token": "EAAB2bdFWL7gBANdr1loPLgOZA2oKvdkZCVlo2WZCTTEMCGHfPuEZB8Ryn5C3bZCtZBTEwRNMQpGzsqSZC7dMeo1Rlsv4ZAe0noYYPg97ZAER1HZBWqdAwLbZA0Vn3dQclnqeYyhZA2fJNIQb0joyMhmZBpI0ZBlDv3DZC7hnzhvCJSYnT7mxF7YAfpCEHTriUEXxR6rheCOFKRELGyIg964MUtZBGZCAZCqTIq637Wk2W51TNEmhmsKwZDZD"
 }
+###
+
+
 ###
 GET   http://localhost:3000/home
 Content-Type: application/json
@@ -15,7 +18,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjM
 ###
 POST http://localhost:3000/users/posts/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTE0ODg1MDg2NzAsImV4cCI6MTYxMTQ4ODU5NTA3MH0.4dFbKjXvNSZxky2PLktAObSNvdJgbg9vqRuVJKypAe4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDBmZTM4ZjY3MTBiNzY5ZTJiZWJhY2QiLCJpYXQiOjE2MTE2NTQ0ODAyNzksImV4cCI6MTYxMTY1NDU2NjY3OX0._s6WzZyvoebVOFmI3Dbhw8UAkNBjcPZQJ5fHuLsf2m8
 
 {
     "body": "halleleleluja"
@@ -32,8 +35,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQxN
     "body": "new casdasdmmentasdasd"
 }
 ###
-POST http://localhost:3000/users/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTEyNjA4NjY0NzcsImV4cCI6MTYxMTI2MDk1Mjg3N30.ylxQM5izSNv2x336tb87wBOWpBVN2sJ4_B6hNFPao08
+GET http://localhost:3000/users/600fe38f6710b769e2bebacd
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDBmZTM4ZjY3MTBiNzY5ZTJiZWJhY2QiLCJpYXQiOjE2MTE2NTQ0ODAyNzksImV4cCI6MTYxMTY1NDU2NjY3OX0._s6WzZyvoebVOFmI3Dbhw8UAkNBjcPZQJ5fHuLsf2m8
 
 {
     "body": "new post body asdlasdkasld"

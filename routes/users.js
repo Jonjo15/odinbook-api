@@ -19,7 +19,11 @@ router.get('/', async (req, res, next) =>{
     res.status(400).json({ msg: e.message });
   }
 });
+//UPDATE PROFILE PICTURE
 
+router.put("/profile_picture", async(req, res,next) => {
+  //TODO: FINISH THIS ROUTE TO UPDATE PROFILE PICTURE
+})
 //UPDATE USER BIO
 router.put("/",
  body('bio', 'Bio must not be empty').trim().isLength({ min: 1 }).escape(),
@@ -67,12 +71,6 @@ router.get("/:userId", async (req, res) => {
   catch (e) {
     res.status(400).json({msg: e.message})
   }
-})
-//TODO: HOME PAGE FEED
-router.get("/home", async(req, res) => {
-  //TODO:
-  // const {friends} = req.user;
-  res.status(200).json({success: true})
 })
 
 //Create a post

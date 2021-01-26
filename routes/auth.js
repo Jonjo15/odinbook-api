@@ -12,17 +12,28 @@ router.get("/protected", passport.authenticate('jwt', { session: false }), (req,
     res.status(200).json({ success: true, msg: req.user});
   });
 
-router.post('/facebook/token', passport.authenticate('facebook-token', {session: false}), (req, res) => {
-  res.status(200).json({success: true, user: req.user})
-}); // function (req, res) {
-  //   // do something with req.user
-  //   res.send(req.user? 200 : 401);
-  // }
-  // facebookOAuth: async (req, res, next) => {
-  //   // Generate token
-  //   const token = signToken(req.user);
-  //   res.status(200).json({ token });
-  // },
+//authenticate with facebook, and get jwt
+router.post('/facebook/token', passport.authenticate('facebook-token', {session: false}), async(req, res) => {
+  try {
+    const {token} = issueJWT(req.user)
+    if(!token) throw Error("Couldnt sign the token")
+    res.status(200).json({
+      success: true,
+      token,
+      user: {
+        id: req.user._id,
+        first_name: req.user.first_name,
+        family_name: req.user.family_name,
+        email: req.user.email
+      }
+    });
+  }
+  catch(e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
+//log in
 router.post("/login", async (req, res, next) => {
     try {
         // Check for existing user
@@ -36,6 +47,7 @@ router.post("/login", async (req, res, next) => {
         if (!token) throw Error('Couldnt sign the token');
     
         res.status(200).json({
+          success: true,
           token,
           user: {
             id: user._id,
@@ -87,6 +99,7 @@ router.post("/register", [
         const {token} = issueJWT(savedUser)
     
         res.status(200).json({
+          success: true, 
           token,
           user: {
             id: savedUser._id,

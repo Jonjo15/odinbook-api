@@ -28,7 +28,6 @@ module.exports = (passport) => {
         fbGraphVersion: 'v9.0'
     }, (accessToken, refreshToken, profile, done) =>  {
         console.log(profile)
-        console.log("im here")
         User.findOne({facebookId: profile.id}, async(err, user) => {
             if(err) {
                 return done(err, false)
@@ -39,7 +38,10 @@ module.exports = (passport) => {
             else {
                 const newUser = new User({
                     facebookId: profile.id,
-                    email: profile.emails[0].value
+                    email: profile.emails[0].value,
+                    profile_pic_url: profile.photos[0].value,
+                    first_name: profile.name.givenName,
+                    family_name: profile.name.familyName
                 })
                 try {
                     const savedUser = await newUser.save()
