@@ -21,7 +21,7 @@ router.post('/facebook/token', passport.authenticate('facebook-token', {session:
       success: true,
       token,
       user: {
-        id: req.user._id,
+        _id: req.user._id,
         first_name: req.user.first_name,
         family_name: req.user.family_name,
         email: req.user.email
@@ -50,7 +50,7 @@ router.post("/login", async (req, res, next) => {
           success: true,
           token,
           user: {
-            id: user._id,
+            _id: user._id,
             first_name: user.first_name,
             family_name: user.family_name,
             email: user.email
@@ -102,7 +102,7 @@ router.post("/register", [
           success: true, 
           token,
           user: {
-            id: savedUser._id,
+            _id: savedUser._id,
             first_name: savedUser.first_name,
             family_name: savedUser.family_name,
             email: savedUser.email

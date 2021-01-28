@@ -1,14 +1,24 @@
-POST  http://localhost:3000/auth/facebook/token 
+POST  http://localhost:5000/auth/facebook/token 
 Content-Type: application/json
 
 {   
-    "access_token": "EAAB2bdFWL7gBANdr1loPLgOZA2oKvdkZCVlo2WZCTTEMCGHfPuEZB8Ryn5C3bZCtZBTEwRNMQpGzsqSZC7dMeo1Rlsv4ZAe0noYYPg97ZAER1HZBWqdAwLbZA0Vn3dQclnqeYyhZA2fJNIQb0joyMhmZBpI0ZBlDv3DZC7hnzhvCJSYnT7mxF7YAfpCEHTriUEXxR6rheCOFKRELGyIg964MUtZBGZCAZCqTIq637Wk2W51TNEmhmsKwZDZD"
+    "access_token": "EAAB2bdFWL7gBAFIitmZC0ICZCFkeTuYNSCVLZCk0LWsvhmDeLFIM0zfpkiVPvC41uHZBcXX6KC4BbZBSVBCpAQsbYT09ZBZCc0CfIKBvShairPqrxf6wD6ZCctyj5npZAT7RnZC3CCWVEDXCgZCOZCWGAzlJTWGSZBCOn0g0tqww9jVlTmNKEUXA4CBzMDRqUTp30mlZCsRSA8dzq3KgZDZD"
 }
 ###
+GET http://localhost:5000/
+###
+POST  http://localhost:5000/auth/register 
+Content-Type: application/json
 
+{   
+    "email": "ivaaassn@ivan.com",
+    "password": "123456",
+    "first_name": "ivan",
+    "family_name": "batur"
+}
 
 ###
-GET   http://localhost:3000/home
+GET   http://localhost:5000/home
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTE0OTAwODgzMjEsImV4cCI6MTYxMTQ5MDE3NDcyMX0.Py9JWnEnE7_e5Xxeq6aKIg2PRl_K3h2VdUo8Ak_kEMI
 
@@ -16,12 +26,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjM
     "body": "HI IM A 6"
 }
 ###
-POST http://localhost:3000/users/posts/
+POST http://localhost:5000/users/posts/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDBmZTM4ZjY3MTBiNzY5ZTJiZWJhY2QiLCJpYXQiOjE2MTE2NTQ0ODAyNzksImV4cCI6MTYxMTY1NDU2NjY3OX0._s6WzZyvoebVOFmI3Dbhw8UAkNBjcPZQJ5fHuLsf2m8
 
 {
-    "body": "halleleleluja"
+    "body": "i am legend"
 }
 ###
 DELETE http://localhost:3000/users/comments/600b365fc084a11e4090697d
