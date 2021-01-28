@@ -11,7 +11,7 @@ POST  http://localhost:5000/auth/register
 Content-Type: application/json
 
 {   
-    "email": "ivaaassn@ivan.com",
+    "email": "ivaaaassn@ivan.com",
     "password": "123456",
     "first_name": "ivan",
     "family_name": "batur"
@@ -20,7 +20,7 @@ Content-Type: application/json
 ###
 GET   http://localhost:5000/home
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTNjMmIyOTU2MjI5MmZmYTI0MjYiLCJpYXQiOjE2MTE0OTAwODgzMjEsImV4cCI6MTYxMTQ5MDE3NDcyMX0.Py9JWnEnE7_e5Xxeq6aKIg2PRl_K3h2VdUo8Ak_kEMI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyZTQzYzIwMmFkYTUzYjFkNmNkNTAiLCJpYXQiOjE2MTE4NTA4MTMwNzMsImV4cCI6MTYxMTg1MDg5OTQ3M30.lWKoIKHYL4s0MYd9DELPVOeY9lFT8RYd7A_Pys8-qaQ
 
 {
     "body": "HI IM A 6"

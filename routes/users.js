@@ -19,8 +19,12 @@ router.get('/', async (req, res, next) =>{
     res.status(400).json({ msg: e.message });
   }
 });
-//UPDATE PROFILE PICTURE
+//Refresh Check
+router.get("/me", async(req, res, next) => {
+  res.json({success: true, user: req.user})
+})
 
+//UPDATE PROFILE PICTURE
 router.put("/profile_picture", async(req, res,next) => {
   //TODO: FINISH THIS ROUTE TO UPDATE PROFILE PICTURE
 })

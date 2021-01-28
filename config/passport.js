@@ -20,7 +20,7 @@ module.exports = (passport) => {
                 return done(null, false);
                 // or you could create a new account
             }
-        });
+        }).select("-password");
     }));
     passport.use(new FacebookTokenStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
