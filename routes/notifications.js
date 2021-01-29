@@ -9,7 +9,10 @@ router.use(passport.authenticate('jwt', { session: false }))
 //GET ALL THE USERS NOTIFICATIONS (TODO: LIMIT 10)
 router.get("/", async(req, res) => {
     try {
-        const notifications = await Notification.find({recipient: req.user._id}).limit(10).sort({"createdAt": -1})
+        const notifications = await Notification.find({recipient: req.user._id})
+                                                .populate("sender", "first_name family_name _id")
+                                                .limit(10)
+                                                .sort({"createdAt": -1})
         if(!notifications) throw Error("No notifications found")
         res.status(200).json({success: true, notifications})
     }
@@ -18,6 +21,7 @@ router.get("/", async(req, res) => {
     }
 })
 //MARK NOTIFICATIONS READ
+//TODO: FIX THIS SO IT ACCEPTS ARRAY OF IDS
 router.put("/", async (req, res) => {
     try {
         const response = await Notification.updateMany({recipient: req.user._id, seen: false}, {seen: true})
