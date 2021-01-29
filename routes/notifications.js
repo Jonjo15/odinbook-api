@@ -9,7 +9,7 @@ router.use(passport.authenticate('jwt', { session: false }))
 //GET ALL THE USERS NOTIFICATIONS (TODO: LIMIT 10)
 router.get("/", async(req, res) => {
     try {
-        const notifications = await Notification.find({recipient: req.user._id})
+        const notifications = await Notification.find({recipient: req.user._id}).limit(10).sort({"createdAt": -1})
         if(!notifications) throw Error("No notifications found")
         res.status(200).json({success: true, notifications})
     }
