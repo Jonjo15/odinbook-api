@@ -53,7 +53,9 @@ router.post("/login", async (req, res, next) => {
             _id: user._id,
             first_name: user.first_name,
             family_name: user.family_name,
-            email: user.email
+            email: user.email,
+            friends: user.friends,
+            friendRequests: user.friendRequests
           }
         });
       } catch (e) {
@@ -105,7 +107,9 @@ router.post("/register", [
             _id: savedUser._id,
             first_name: savedUser.first_name,
             family_name: savedUser.family_name,
-            email: savedUser.email
+            email: savedUser.email,
+            friendRequests: savedUser.friendRequests,
+            friends: savedUser.friends
           }
         });
       } catch (e) {

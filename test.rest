@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-GET   http://localhost:5000/home
+GET   http://localhost:5000/users/me
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyZTQzYzIwMmFkYTUzYjFkNmNkNTAiLCJpYXQiOjE2MTE4NTA4MTMwNzMsImV4cCI6MTYxMTg1MDg5OTQ3M30.lWKoIKHYL4s0MYd9DELPVOeY9lFT8RYd7A_Pys8-qaQ
 
