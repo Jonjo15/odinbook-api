@@ -10,6 +10,7 @@ router.use(passport.authenticate('jwt', { session: false }))
 router.get("/", async(req, res) => {
     try {
         const notifications = await Notification.find({recipient: req.user._id})
+                                                .populate("commentId", "post _id")
                                                 .populate("sender", "first_name family_name _id")
                                                 .limit(10)
                                                 .sort({"createdAt": -1})

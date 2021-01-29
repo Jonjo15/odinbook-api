@@ -188,7 +188,7 @@ router.post("/posts/:postId", [
           const newNotify = new Notification({
           sender: req.user._id,
           recipient: post.creator,
-          post: post._id,
+          postId: post._id,
           type: "comment"
         })
         notify = await newNotify.save()
@@ -225,7 +225,7 @@ router.put("/posts/:postId", async (req, res, next) => {
         const newNotify = new Notification({
         sender: req.user._id,
         recipient: post.creator,
-        post: post._id,
+        postId: post._id,
         type: "like"
       })
       notify = await newNotify.save()
@@ -260,7 +260,7 @@ router.put("/comments/:commentId", async (req, res, next) => {
       const newNotify = new Notification({
       sender: req.user._id,
       recipient: comment.creator,
-      comment: comment._id,
+      commentId: comment._id,
       type: "comment"
     })
     notify = await newNotify.save()
