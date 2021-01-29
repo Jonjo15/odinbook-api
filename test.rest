@@ -7,14 +7,12 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/
 ###
-POST  http://localhost:5000/auth/register 
+POST  http://localhost:5000/auth/login 
 Content-Type: application/json
 
 {   
-    "email": "ivaaaassn@ivan.com",
-    "password": "123456",
-    "first_name": "ivan",
-    "family_name": "batur"
+    "email": "ivaaaaasaaaassn@ivan.com",
+    "password": "123456"
 }
 
 ###

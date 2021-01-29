@@ -24,7 +24,9 @@ router.post('/facebook/token', passport.authenticate('facebook-token', {session:
         _id: req.user._id,
         first_name: req.user.first_name,
         family_name: req.user.family_name,
-        email: req.user.email
+        email: req.user.email,
+        friends: req.user.friends,
+        friendRequests: req.user.friendRequests
       }
     });
   }
