@@ -36,15 +36,24 @@ router.get("/all", async (req, res) => {
         res.status(400).json({success: false, msg: e.message})
     }
 })
-//MARK NOTIFICATIONS READ
-//TODO: FIX THIS SO IT ACCEPTS ARRAY OF IDS
-router.put("/", async (req, res) => {
+//MARK all users NOTIFICATIONS READ
+router.put("/all", async (req, res) => {
     try {
         const response = await Notification.updateMany({recipient: req.user._id, seen: false}, {seen: true})
         if(!response) throw Error("Something went wrong with updating notifications")
         res.status(200).json({success: true, response})
     }
     catch(e){
+        res.status(400).json({success: false, msg: e.message})
+    }
+})
+router.put("/", async (req, res) => {
+    try {
+        const response = await Notification.updateMany({recipient: req.user._id, _id: {$in: req.body.notifications}}, {seen:true})
+        if(!response) throw Error("Something went wrong with updating notifications")
+        res.status(200).json({success: true, response})
+    }
+    catch(e) {
         res.status(400).json({success: false, msg: e.message})
     }
 })

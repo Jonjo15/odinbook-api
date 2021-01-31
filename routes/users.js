@@ -261,7 +261,7 @@ router.put("/comments/:commentId", async (req, res, next) => {
       sender: req.user._id,
       recipient: comment.creator,
       commentId: comment._id,
-      type: "comment"
+      type: "like"
     })
     notify = await newNotify.save()
     if(!notify) throw Error("Something went wrong with saving notification")
