@@ -37,7 +37,7 @@ router.get("/home",passport.authenticate('jwt', { session: false }), async(req, 
        select: 'first_name family_name _id'
       //  model: 'Component'
       }]
-    }).limit(25).sort({"createdAt": -1})
+    }).sort({"createdAt": -1}).limit(25)
     timelinePosts = [ ...friendPosts]
     res.status(200).json({success: true, timelinePosts})
   }

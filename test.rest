@@ -11,14 +11,14 @@ POST  http://localhost:5000/auth/login
 Content-Type: application/json
 
 {   
-    "email": "ivaaaaasaaaassn@ivan.com",
+    "email": "ivan@ivan.com",
     "password": "123456"
 }
 
 ###
-GET   http://localhost:5000/users/me
+GET   http://localhost:5000/notifications
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyZTQzYzIwMmFkYTUzYjFkNmNkNTAiLCJpYXQiOjE2MTE4NTA4MTMwNzMsImV4cCI6MTYxMTg1MDg5OTQ3M30.lWKoIKHYL4s0MYd9DELPVOeY9lFT8RYd7A_Pys8-qaQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEzZWZiYTJlNDU2NTZjMjgyYjExNjIiLCJpYXQiOjE2MTIxMDUxMzMwMTYsImV4cCI6MTYxMjEwNTIxOTQxNn0.UgvatePmXzgD9v6LEfy4K-C_ZzK2xdIc0w3wVHnfvdc
 
 {
     "body": "HI IM A 6"
@@ -43,9 +43,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQxN
     "body": "new casdasdmmentasdasd"
 }
 ###
-GET http://localhost:3000/users/600fe38f6710b769e2bebacd
+GET http://localhost:5000/notifications/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDBmZTM4ZjY3MTBiNzY5ZTJiZWJhY2QiLCJpYXQiOjE2MTE2NTQ0ODAyNzksImV4cCI6MTYxMTY1NDU2NjY3OX0._s6WzZyvoebVOFmI3Dbhw8UAkNBjcPZQJ5fHuLsf2m8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE0MzlmMzk0MGQ0MDM5ZmU3YTM0MzYiLCJpYXQiOjE2MTE5MzgyOTE0NzUsImV4cCI6MTYxMTkzODM3Nzg3NX0.7rMbpXYJzB-U25i2gh3t5wOINbHyOvia2zBUO3rdV80
 
 {
     "body": "new post body asdlasdkasld"

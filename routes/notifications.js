@@ -12,8 +12,9 @@ router.get("/", async(req, res) => {
         const notifications = await Notification.find({recipient: req.user._id})
                                                 .populate("commentId", "post _id")
                                                 .populate("sender", "first_name family_name _id")
-                                                .limit(10)
                                                 .sort({"createdAt": -1})
+                                                .limit(10)
+                                              
         if(!notifications) throw Error("No notifications found")
         res.status(200).json({success: true, notifications})
     }
@@ -21,6 +22,7 @@ router.get("/", async(req, res) => {
         res.status(400).json({success: false, msg: e.message})
     }
 })
+
 //MARK NOTIFICATIONS READ
 //TODO: FIX THIS SO IT ACCEPTS ARRAY OF IDS
 router.put("/", async (req, res) => {
