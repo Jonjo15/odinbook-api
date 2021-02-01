@@ -4,7 +4,19 @@ const passport = require("passport")
 const User = require("../models/user")
 const Notification = require("../models/notification")
 router.use(passport.authenticate('jwt', { session: false }))
+//GET FRIEND REQUEST INFO
+router.get("/", async (req, res) => {
+    const {friendRequests} = req.user
 
+    try {
+        const requests = await User.find({_id: {$in: friendRequests}}).select("_id first_name family_name")
+        if(!requests) throw Error("Something went wrong")
+        res.status(200).json({success: true, requests})
+    }
+    catch(e) {
+        res.status(400).json({success:false, msg: e.message})
+    }
+})
 
 //SEND FRIEND REQUEST
 router.post("/:userId", async(req, res, next) => {
