@@ -62,14 +62,16 @@ router.get("/:userId", async (req, res) => {
     if (index === -1 && !bool) throw Error("You are not allowed to see this users posts")
 
 
-    const posts = await Post.find({creator: user._id}).populate({ 
-      path: 'comments',
-      populate: [{
-       path: 'creator',
-       select: 'first_name family_name _id'
-      //  model: 'Component'
-      }] 
-   })
+    const posts = await Post.find({creator: user._id})
+                            .populate("creator", "first_name family_name _id")
+                            .populate({ 
+                              path: 'comments',
+                              populate: [{
+                              path: 'creator',
+                              select: 'first_name family_name _id'
+                              //  model: 'Component'
+                              }] 
+                          })
     res.status(200).json({success: true, user, posts})
   }
   catch (e) {
