@@ -11,6 +11,7 @@ const UserSchema = new Schema(
       facebookId: {type: String},
       bio: {type: String, maxlength: 300},
       profile_pic_url: {type: String},
+      profile_pic_public_id: {type: String},
       admin: { type: Boolean, default: false },
       friends: [{type: Schema.Types.ObjectId, ref: "User"}],
       friendRequests: [{type: Schema.Types.ObjectId, ref: "User"}]
