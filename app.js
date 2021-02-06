@@ -2,8 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-// const cookieSession = require('cookie-session');
-// cookieSession makes req.user possible
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
 var logger = require('morgan');
 require("dotenv").config()
 var indexRouter = require('./routes/index');
@@ -17,10 +17,13 @@ var app = express();
 const isAuth = require("./middleware/auth")
 
 var mongoose = require('mongoose');
-var mongoDB =process.env.DB_ALTERNATE || process.env.DB_HOST;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useCreateIndex: true,  useFindAndModify: false , useUnifiedTopology: true});
+var mongoDB = process.env.DB_ALTERNATE || process.env.DB_HOST;
+mongoose.connect(mongoDB, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// const storage = new GridFSStorage({ db: db });
+
 
 require('./config/passport')(passport);
 app.use(passport.initialize())
@@ -40,12 +43,12 @@ app.use("/notifications", notificationRouter)
 app.use("/auth", authRouter)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

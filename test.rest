@@ -16,12 +16,12 @@ Content-Type: application/json
 }
 
 ###
-GET   http://localhost:5000/notifications
+GET    http://localhost:5000/notifications/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEzZWZiYTJlNDU2NTZjMjgyYjExNjIiLCJpYXQiOjE2MTIxMDUxMzMwMTYsImV4cCI6MTYxMjEwNTIxOTQxNn0.UgvatePmXzgD9v6LEfy4K-C_ZzK2xdIc0w3wVHnfvdc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE1MjdjMjQ1OWRkNDZhYmQ4M2JmZDMiLCJpYXQiOjE2MTIxMjQyNzI2MDYsImV4cCI6MTYxMjEyNDM1OTAwNn0.5mnjjFTuqkQXkXkzinI63emoELLsJxr6grnyemWoJ1M
 
 {
-    "body": "HI IM A 6"
+    "notifications": ["6017118c9506d6498a35a844", "6017118e9506d6498a35a845"]
 }
 ###
 POST http://localhost:5000/users/posts/
@@ -43,9 +43,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDA5ZTQxN
     "body": "new casdasdmmentasdasd"
 }
 ###
-GET http://localhost:5000/notifications/
+GET http://localhost:5000/requests/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE0MzlmMzk0MGQ0MDM5ZmU3YTM0MzYiLCJpYXQiOjE2MTE5MzgyOTE0NzUsImV4cCI6MTYxMTkzODM3Nzg3NX0.7rMbpXYJzB-U25i2gh3t5wOINbHyOvia2zBUO3rdV80
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEzZWZiYTJlNDU2NTZjMjgyYjExNjIiLCJpYXQiOjE2MTIxODM4MDg0MjgsImV4cCI6MTYxMjE4Mzg5NDgyOH0._FEZv88q0wpGZwByrRPlwn6YbdDcXe1ZOA2ah7g7JQw
 
 {
     "body": "new post body asdlasdkasld"
