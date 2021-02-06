@@ -26,7 +26,7 @@ router.get("/me", async(req, res, next) => {
 })
 
 //UPDATE PROFILE PICTURE
-router.put("/profile_picture", async(req, res,next) => {
+router.put("/profile_picture", async(req, res) => {
   //TODO: FINISH THIS ROUTE TO UPDATE PROFILE PICTURE
     try {
       const fileStr = req.body.data;
@@ -34,10 +34,10 @@ router.put("/profile_picture", async(req, res,next) => {
           upload_preset: 'dev_setups',
       });
       console.log(uploadResponse);
+      res.status(200).json({success: true, uploadResponse})
       //const response = await User.findByIdAndUpdate(req.user._id, {profile_pic_public_id: uploadResponse.public_id}, {new: true}).select("-password")
       //TODO:FINISH
-      res.json({ success: true, uploadResponse });
-      } catch (err) {
+      } catch (e) {
           res.status(400).json({msg: e.message})
         }
 })
