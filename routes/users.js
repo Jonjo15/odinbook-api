@@ -31,11 +31,12 @@ router.put("/profile_picture", async(req, res) => {
     try {
       const fileStr = req.body.data;
       const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-          upload_preset: 'dev_setups',
+          upload_preset: "moxqjptj",
       });
       console.log(uploadResponse);
-      res.status(200).json({success: true, uploadResponse})
-      //const response = await User.findByIdAndUpdate(req.user._id, {profile_pic_public_id: uploadResponse.public_id}, {new: true}).select("-password")
+      // res.status(200).json({success: true, uploadResponse})
+      const response = await User.findByIdAndUpdate(req.user._id, {profile_pic_url: uploadResponse.secure_url}, {new: true}).select("-password")
+      res.status(200).json({success: true, user: response})
       //TODO:FINISH
       } catch (e) {
           res.status(400).json({msg: e.message})

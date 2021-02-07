@@ -26,7 +26,8 @@ router.post('/facebook/token', passport.authenticate('facebook-token', {session:
         family_name: req.user.family_name,
         email: req.user.email,
         friends: req.user.friends,
-        friendRequests: req.user.friendRequests
+        friendRequests: req.user.friendRequests,
+        profile_pic_url: req.user.profile_pic_url
       }
     });
   }
@@ -57,7 +58,7 @@ router.post("/login", async (req, res, next) => {
             family_name: user.family_name,
             email: user.email,
             friends: user.friends,
-            friendRequests: user.friendRequests
+            friendRequests: user.friendRequests,
           }
         });
       } catch (e) {
@@ -111,7 +112,7 @@ router.post("/register", [
             family_name: savedUser.family_name,
             email: savedUser.email,
             friendRequests: savedUser.friendRequests,
-            friends: savedUser.friends
+            friends: savedUser.friends,
           }
         });
       } catch (e) {
