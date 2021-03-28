@@ -1,9 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
 var logger = require('morgan');
 require("dotenv").config()
 var indexRouter = require('./routes/index');
@@ -14,15 +11,12 @@ const requestRouter = require("./routes/requests")
 const notificationRouter = require("./routes/notifications")
 const passport = require("passport")
 var app = express();
-const isAuth = require("./middleware/auth")
 
 var mongoose = require('mongoose');
 var mongoDB = process.env.DB_ALTERNATE || process.env.DB_HOST;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// const storage = new GridFSStorage({ db: db });
 
 
 require('./config/passport')(passport);
@@ -31,9 +25,8 @@ app.use(passport.initialize())
 
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.json({limit: "50mb"}));
+app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 app.use('/', indexRouter);
